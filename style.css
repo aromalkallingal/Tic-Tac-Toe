@@ -25,5 +25,10 @@ h1 {
 .grid-box {
     border: 1px solid blue;
     color: red;
-    font-size: 100px;
+    font-size: 50px;
+}
+
+.game-board-button {
+    background-color: white;
+    grid-row: 2 / 3;
 }
