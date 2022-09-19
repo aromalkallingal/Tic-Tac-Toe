@@ -32,3 +32,7 @@ h1 {
     background-color: white;
     grid-row: 2 / 3;
 }
+
+.start-game-button {
+    margin-top: 25px;
+}
