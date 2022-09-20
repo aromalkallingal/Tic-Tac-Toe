@@ -2,46 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tic-Tac-Te</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style.css">
+    <title>Tic-Tac-Toe-Game</title>
 </head>
 <body>
-    
-    <h1>Tic Tac Toe</h1>
-    <div class="container">
-        <div class="grid-box grid-box0">
-            <button type="submit" class="game-board-button">Select</button>
+    <h1>tic-tac-toe</h1>
+    <div id='playersDiv'> 
+        <div class="playerDiv1">
+            <h3>Player 1</h3>
+            <h2>X</h2>
         </div>
-        <div class="grid-box grid-box1">
-            <button type="submit" class="game-board-button">Select</button>
-        </div>
-        <div class="grid-box grid-box2">
-            <button type="submit" class="game-board-button">Select</button>
-        </div>
-        <div class="grid-box grid-box3">
-            <button type="submit" class="game-board-button">Select</button>
-        </div>
-        <div class="grid-box grid-box4">
-            <button type="submit" class="game-board-button">Select</button>
-        </div>
-        <div class="grid-box grid-box5">
-            <button type="submit" class="game-board-button">Select</button>
-        </div>
-        <div class="grid-box grid-box6">
-            <button type="submit" class="game-board-button">Select</button>
-        </div>
-        <div class="grid-box grid-box7">
-            <button type="submit" class="game-board-button">Select</button>
-        </div>
-        <div class="grid-box grid-box8">
-            <button type="submit" class="game-board-button">Select</button>
+        <div class='playerDiv2'> 
+            <h3>Player 2</h3>
+            <h2>O</h2>
         </div>
     </div>
-
-    <button type="submit" class="start-game-button">Start/Restart Game</button>
-
-    <script src="app.js"></script>
+    <div id='result'></div>
+    <div id="gameBoard">
+        <div id='gameCell1' class="1" onclick="boxElement(1)"></div>
+        <div id='gameCell2' class="2" onclick="boxElement(2)"></div>
+        <div id='gameCell3' class="3" onclick="boxElement(3)"></div>
+        <div id='gameCell4' class="4" onclick="boxElement(4)"></div>
+        <div id='gameCell5' class="5" onclick="boxElement(5)"></div>
+        <div id='gameCell6' class="6" onclick="boxElement(6)"></div>
+        <div id='gameCell7' class="7" onclick="boxElement(7)"></div>
+        <div id='gameCell8' class="8" onclick="boxElement(8)"></div>
+        <div id='gameCell9' class="9" onclick="boxElement(9)"></div>
+    </div>
+    <button id='pageRefresh' onclick="refreshPage()">Reset</button>
+    <script src='./app.js'></script> 
 </body>
 </html>

@@ -1,99 +1,86 @@
-let createPlayer = () => {
-    for (let i = 0 ; i < 4; i++) {
+var gameBoard = ['', '', '', '', '', '', '', '', ''];
 
-        if (gameBoardModule.playArray.length >= 6) {
-            gameBoardModule.makePlayerMove();
-            break;
-        } else if (gameBoardModule.playArray.length == 0) {
-            let playerName = prompt("what is your first name?");
-
-            if (playerName == "" || playerName == null) {
-                alert("Sorry, name cannot be blank!");
-                continue;
-            }
-
-            let playerNumber = 1;
-            let assignedXO = "X";
-            alert("You are player 1,  and your assigned letter is  X!");
-            gameBoardModule.playArray.push(playerName, playerNumber, assignedXO);
-            console.log("show me the contents of the playArray.....", gameBoardModule.playArray);
-        
-        } else if (gameBoardModule.playArray.length != 0) {
-            let playerName = prompt("What is your first name, sir?");
-
-            if (playerName == "" || playerName == null) {
-                alert("Sorry, name cannot be blank!");
-                continue;
-            }
-
-            let playerNumber = 2;
-            let assignedXO = "O";
-            alert("You are player 2, and your assigned letter is o!");
-            gameBoardModule.playArray.push(playerName, playerNumber, assignedXO);
-            console.log("Show me the contents of the playerArray", gameBoardModule.playArray);   
-        }
+function boardDisplay() {
+    for (let i = 1; i <= gameBoard.length; i++) {
+        var box1 = document.getElementById(`gameCell${i}`);
+        box1.innerHTML = gameBoard[i - 1];
     }
-};
+}
 
-let gameBoardModule = (function() {
-    let gameBoard = [];
-    let playArray = [];
-
-    let makePlayerMove = () => {
-        if (playArray.length == 6 && gameBoard.length < 9) {
-
-            if (gameBoard.length == 0) {
-                alert("Player 1, please make your move!");
-                gameBoard.push(playArray[2]);
-                console.log("Show me the current gameBoardArray.....", gameBoard);
-            } else if (gameBoard[gameBoard.length - 1] == "X") {
-                alert("Player 2, please make your move!");
-                gameBoard.push(playArray[5]);
-                cosole.log("Show me the current gameBoard Array.....", gameBoard);
-            } 
-            else if (gameBoard[gameBoard.length - 1] == "O") {
-                alert("Player 1, please make your move!");
-                gameBoard.push(playArray[2]);
-                cosole.log("Show me the current gameBoard Array.....", gameBoard);
-            } 
-        };
+let count = 0;
+function boxElement(atr) {
+    let box = document.getElementById(`gameCell${atr}`);
+    if (count % 2 === 0 && box.innerHTML === '') {
+        gameBoard[atr - 1] = 'X';
+        count++;
+    } else if (box.innerHTML === '') {
+        gameBoard[atr - 1] = 'O';
+        count++;
     }
-    return {gameBoard, playArray, makePlayerMove};
-})();
+    console.log(count);
+    if (count >= 9) {
+        drawmatch();
+    }
+    boardDisplay();
+    gamePoint(gameBoard);
+}
 
+function gamePoint(arr) {
+    if ((arr[0] === arr[1] && arr[1] === arr[2]) && arr[1] != '') {
+        if (arr[0] === 'X') finalResult('X');
+        else if (arr[0] === 'O') finalResult('O');
+    }
+    if ((arr[3] === arr[4] && arr[4] === arr[5]) && arr[3] != '') {
+        if (arr[3] === 'X') finalResult('X');
+        else if (arr[3] === 'O') finalResult('O');
+    }
+    if ((arr[6] === arr[7] && arr[7] === arr[8]) && arr[6] != '') {
+        if (arr[6] === 'X') finalResult('X');
+        else if (arr[6] === 'O') finalResult('O');
+    }
+    if ((arr[0] === arr[3] && arr[3] === arr[6]) && arr[0] != '') {
+        if (arr[0] === 'X') finalResult('X');
+        else if (arr[0] === 'O') finalResult('O');
+    }
+    if ((arr[1] === arr[4] && arr[4] === arr[7]) && arr[1] != '') {
+        if (arr[1] === 'X') finalResult('X');
+        else if (arr[0] === 'O') finalResult('O');
+    }
+    if ((arr[2] === arr[5] && arr[5] === arr[8]) && arr[2] != '') {
+        if (arr[2] === 'X') finalResult('X');
+        else if (arr[2] === 'O') finalResult('O');
+    }
+    if ((arr[0] === arr[4] && arr[4] === arr[8]) && arr[0] != '') {
+        if (arr[0] === 'X') finalResult('X');
+        else if (arr[0] === 'O') finalResult('O');
+    }
+    if (((arr[2] === arr[4] && arr[4] === arr[6]) && arr[2] != '')) {
+        if (arr[2] === 'X') finalResult('X');
+        else if (arr[2] === 'O') finalResult('O');
+    }
 
-let displayControllerModule = (function() {
-    const makeMove = document.querySelectorAll(".game-board-button");
+}
 
-    let index = 0;
-    makeMove.forEach(makeMoves => {
-        makeMoves.dataset.linkedButton = index;
-        makeMoves.addEventListener("click", renderArrayToScreen);
+function finalResult(input) {
+    var x = document.getElementById("gameBoard");
+    x.style.filter = 'blur(10px)';
+    var y = document.getElementById('result');
+    y.innerHTML = '"' + input + '" won this game';
 
-        function renderArrayToScreen() {
-            const gridBoxes = document.querySelectorAll(".grid-box");
+    x.addEventListener("click", handler, true);
 
-            let index = 0;
-            gridBoxes.forEach(gridBox => {
-                gridBox.dataset.linkedButton = index;
+    function handler(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        return false;
+    }
+}
 
-                if (gridBox.getAttribute("data-linked-button") ==makeMoves.getAttribute("data-linked-button")) {
-                    gridBox.textContent = gameBoardModule.gameBoard[gameBoardModule.gameBoard.length - 1];
-                    console.log(makeMoves.dataset.linkedButton);
-                    console.log(gridBox.dataset.linkedButton);
-                }
-            index++;
-            }) 
-        }
-    index++;
-    })
+function refreshPage() {
+    window.location.reload();
+}
 
-    // 
-    
-    const startGameButton = document.querySelector(".start-game-button");
-    startGameButton.addEventListener("click", createPlayer);
-    return{};
-
-})();
-
-
+function drawmatch() {
+    var a = document.getElementById('result');
+    a.innerHTML = 'Its a draw match';
+}
